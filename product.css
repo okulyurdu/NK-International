@@ -1,0 +1,281 @@
+
+:root {
+    --primary-green: #4f5a4a; /* Taktiksel Askeri Yeşil */
+    --dark-green: #2d332a; /* Koyu Taktiksel Yeşil */
+    --dark-bg: #1a1c1a; /* Antrasit / Gece Grisi */
+    --accent-bronze: #a6906a; /* Şık Bronz/Altın Vurgu */
+    --text-light: #f4f5f4;
+    --text-white: #ffffff;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+h1, h2, h3, .logo {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* --- ÜST MENÜ (NAVBAR) --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 100; /* Slider'ın ve overlay'in üstünde kalmasını sağlar */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    background-color: #e7e3ab69;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+ 
+.logo img {
+    height: 150px;
+   margin-right: 20px;
+   vertical-align: middle;
+   border-radius: 10px;
+}
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    vertical-align: middle;
+    color: var(--text-white);
+    letter-spacing: 2px;
+    
+   
+}
+
+.logo span {
+    font-weight: 500;
+    color: var(--accent-bronze);
+    font-size: 18px;
+    letter-spacing: 4px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--text-white);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-bronze);
+}
+
+.btn-nav {
+    border: 1px solid var(--accent-bronze);
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+.btn-nav:hover {
+    background-color: var(--accent-bronze);
+    color: var(--dark-bg) !important;
+}
+
+
+.boşluk{
+    display: block;
+    height: 250px;
+}
+
+
+.inventory-page-body {
+    background-color: #050605;
+    color: #a0a5a0;
+    min-height: 100vh;
+}
+
+.text-bronze { color: #A6906A; }
+
+.inventory-section {
+    padding: 40px 20px 100px;
+}
+
+/* --- KATEGORİ FİLTRELERİ --- */
+.tactical-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.filter-btn {
+    background: #0a0c0a;
+    border: 1px solid rgba(166, 144, 106, 0.3);
+    color: #8fa388;
+    padding: 12px 25px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background: rgba(166, 144, 106, 0.15);
+    border-color: #A6906A;
+    color: #A6906A;
+    box-shadow: 0 0 15px rgba(166, 144, 106, 0.2);
+}
+
+/* --- ÜRÜN GRID YAPISI --- */
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 40px;
+}
+
+/* --- ZIRHLI ÜRÜN KARTI --- */
+.product-card {
+    background: linear-gradient(145deg, #181b18 0%, #0a0c0a 100%);
+    border: 1px solid rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(166, 144, 106, 0.3);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.8);
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    border-top-color: #A6906A;
+    box-shadow: 0 25px 45px rgba(0,0,0,1), 0 0 15px rgba(166, 144, 106, 0.1);
+}
+
+/* Ürün Görseli */
+.product-image {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85) contrast(1.1);
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+    filter: brightness(1) contrast(1.1);
+}
+
+/* Kategori Etiketi */
+.product-category {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(10, 12, 10, 0.9);
+    border: 1px solid #A6906A;
+    color: #A6906A;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+/* Ürün Bilgileri */
+.product-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-info h3 {
+    color: #f0f0f0;
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.product-desc {
+    color: #7a8276;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Butonu her zaman en alta iter */
+}
+
+/* Teknik Özellikler Kutusu */
+.tech-specs {
+    background: rgba(0, 0, 0, 0.4);
+    border-left: 2px solid #A6906A;
+    padding: 12px;
+    margin-bottom: 25px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+}
+
+.spec-item {
+    color: #c0c5c0;
+    margin-bottom: 5px;
+}
+
+.spec-item:last-child { margin-bottom: 0; }
+.spec-item span { color: #A6906A; font-weight: bold; margin-right: 5px; }
+
+/* Şartname İste Butonu */
+.request-btn {
+    display: inline-block;
+    text-align: center;
+    background: transparent;
+    border: 1px solid #A6906A;
+    color: #A6906A;
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.request-btn:hover {
+    background: #A6906A;
+    color: #050605;
+}
+
+.request-btn .arrow {
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.request-btn:hover .arrow {
+    transform: translateX(5px);
+}

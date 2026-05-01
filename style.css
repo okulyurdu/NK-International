@@ -1,0 +1,928 @@
+/* --- TEMEL DEĞİŞKENLER VE SIFIRLAMA --- */
+:root {
+    --primary-green: #4f5a4a; /* Taktiksel Askeri Yeşil */
+    --dark-green: #2d332a; /* Koyu Taktiksel Yeşil */
+    --dark-bg: #1a1c1a; /* Antrasit / Gece Grisi */
+    --accent-bronze: #a6906a; /* Şık Bronz/Altın Vurgu */
+    --text-light: #f4f5f4;
+    --text-white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+h1, h2, h3, .logo {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* --- ÜST MENÜ (NAVBAR) --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 100; /* Slider'ın ve overlay'in üstünde kalmasını sağlar */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    background-color: #e7e3ab69;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+ 
+.logo img {
+    height: 150px;
+   margin-right: 20px;
+   vertical-align: middle;
+   border-radius: 10px;
+}
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    vertical-align: middle;
+    color: var(--text-white);
+    letter-spacing: 2px;
+    
+   
+}
+
+.logo span {
+    font-weight: 500;
+    color: var(--accent-bronze);
+    font-size: 18px;
+    letter-spacing: 4px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: var(--text-white);
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-bronze);
+}
+
+.btn-nav {
+    border: 1px solid var(--accent-bronze);
+    padding: 10px 20px;
+    border-radius: 3px;
+}
+
+.btn-nav:hover {
+    background-color: var(--accent-bronze);
+    color: var(--dark-bg) !important;
+}
+
+
+
+/* --- ANA EKRAN (HERO SECTION) --- */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Tam ekran yüksekliği */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* --- ARKA PLAN FOTOĞRAF SLIDER'I (CSS SADECE) --- */
+.hero-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Her bir fotoğrafın genel ayarları */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    /* 3 fotoğraf var, her biri 5 saniye = Toplam animasyon döngüsü 15 saniye */
+    animation: fadeSlider 15s infinite; 
+}
+
+/* Sırasıyla animasyonların başlangıç zamanlarını (delay) ayarlıyoruz */
+.slide:nth-child(1) { animation-delay: 0s; }
+.slide:nth-child(2) { animation-delay: 5s; }
+.slide:nth-child(3) { animation-delay: 10s; }
+
+/* CSS Fade Animasyonu (Geçişleri yumuşatır) */
+@keyframes fadeSlider {
+    0%   { opacity: 0; transform: scale(1); }
+    10%  { opacity: 1; }
+    33%  { opacity: 1; }
+    43%  { opacity: 0; transform: scale(1.05); } /* Hafif bir yakınlaşma efekti katar */
+    100% { opacity: 0; }
+}
+
+/* Karanlık Katman: Metnin okunabilir olması için arka planı biraz karartır */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 28, 26, 0.65); /* Taktiksel koyu filtre */
+    z-index: 2;
+}
+
+/* --- SABİT METİN VE İÇERİK --- */
+.hero-content {
+    position: relative;
+    z-index: 10; /* En üstte durur */
+    text-align: center;
+    padding: 50px 100px;
+    background-color: rgba(228, 223, 181, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    color: var(--accent-bronze);
+    font-size: 2rem;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.highlight {
+    color: var(--primary-green);
+    /* Gerekirse buraya farklı bir vurgu da yapabilirsiniz */
+}
+
+.hero-description {
+    font-size: 20px;
+    font-weight: 400;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    color: #cccccc;
+}
+
+/* --- BUTONLAR --- */
+.hero-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 15px 35px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    color: var(--text-white);
+    border: 2px solid var(--primary-green);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--primary-green);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-white);
+    border: 2px solid var(--text-white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-white);
+    color: var(--dark-bg);
+}
+
+/* Mobil Cihazlar İçin Uyum (Responsive) */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 32px;
+    }
+    .hero-actions {
+        flex-direction: column;
+    }
+    .nav-links {
+        display: none; /* Mobilde hamburger menü gerekir, şimdilik gizliyoruz */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- GENEL ORTAK SINIFLAR --- */
+.section { padding: 120px 20px; }
+.container { max-width: 1200px; margin: 0 auto; position: relative; }
+.relative { position: relative; }
+.text-center { text-align: center; }
+.mb-50 { margin-bottom: 60px; }
+.text-bronze { color: var(--accent-bronze); }
+
+.section-subtitle {
+    color: var(--accent-bronze);
+    font-size: 14px;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.section-title {
+    font-size: 42px;
+    color: var(--text-white);
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.title-separator {
+    width: 60px;
+    height: 3px;
+    background-color: var(--accent-bronze);
+    margin: 0 auto;
+}
+
+/* --- PREMIUM KURUMSAL BÖLÜM (KATMANLI TASARIM) --- */
+.premium-about {
+    background-color: #121412; /* Çok koyu taktiksel zemin */
+    padding-bottom: 150px;
+    position: relative; /* Arka plan yalancı öğesi için gerekli */
+    overflow: hidden; /* Dışarı taşmaları engeller */
+}
+
+/* YENİ: Düşük Opaklıklı Arka Plan Görseli (En arkadaki katman) */
+.premium-about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* GÖRSEL YOLUNU BURAYA EKLEYİN */
+    background-image: url('./fotolar/askeri\ background.png'); 
+    background-size: cover;
+    background-position: center;
+    opacity: 0.25; /* Görselin şeffaflık oranı (%15) */
+    z-index: 0; /* İçeriklerin arkasında kalması için en alta atıyoruz */
+}
+
+/* İçeriklerin arka planın altında ezilmemesi için container'ı öne alıyoruz */
+.premium-about .container {
+    position: relative;
+    z-index: 2;
+}
+
+.about-hero-image {
+    width: 70%;
+    height: 600px;
+    background-color: var(--dark-green);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    /* Resmi biraz karartarak üzerine gelen kutuyu belirginleştiriyoruz */
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
+}
+
+.about-hero-image::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(90deg, #121412 0%, rgba(18,20,18,0.3) 100%);
+}
+
+.about-content-box {
+    position: relative;
+    width: 55%;
+    background: rgba(26, 28, 26, 0.85); /* Yarı şeffaf antrasit */
+    backdrop-filter: blur(15px); /* Buzlu cam efekti */
+    -webkit-backdrop-filter: blur(15px);
+    padding: 60px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-left: none;
+    margin-top: 80px;
+    box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
+    z-index: 2;
+}
+
+.accent-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--accent-bronze);
+}
+
+.about-text {
+    color: #b0b0b0;
+    font-size: 17px;
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.about-stats-grid {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 30px;
+}
+
+.stat-item h3 {
+    font-size: 36px;
+    color: var(--text-white);
+    margin-bottom: 5px;
+}
+
+.stat-item p {
+    color: var(--accent-bronze);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-outline {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid var(--accent-bronze);
+    color: var(--text-white);
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background-color: var(--accent-bronze);
+    color: #000;
+}
+
+.btn-outline .arrow { transition: transform 0.3s; display: inline-block; }
+.btn-outline:hover .arrow { transform: translateX(5px); }
+
+
+
+
+
+
+
+.boşluk {
+    height: 200px;
+}
+
+
+
+
+/* --- TAKTİKSEL HİZMETLER BÖLÜMÜ (DÜZELTİLMİŞ ARKA PLAN TASARIMI) --- */
+
+.tactical-services {
+    background-color: #121412; 
+    padding: 100px 20px;
+    position: relative; /* Bu çok önemli, yalancı öğeler için zemin oluşturur */
+    overflow: hidden; /* Yalancı öğe dışarı taşmasın diye */
+}
+
+/* 1. Başlık ve Alt Başlıklar (Yalancı öğenin önünde kalması için) */
+.tactical-services .section-title,
+.tactical-services .section-subtitle,
+.tactical-services .title-separator {
+    position: relative; /* z-index çalışması için */
+    z-index: 2; /* İçerik katmanını yükseltiyoruz */
+}
+
+/* 2. Mevcut Taktiksel Grid Deseni (Yalancı öğenin önünde, içeriğin arkasında) */
+.tactical-services::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none; 
+    z-index: 1; /* Görselden hemen sonraki katman */
+}
+
+/* 3. YENİ: Düşük Opaklıklı Arka Plan Görseli (En arkadaki yalancı öğe) */
+.tactical-services::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Kullanıcının file path ekleyeceği alan */
+    background-image: url('./fotolar/askeri\ background.png'); 
+    background-size: cover; /* Görseli tüm alanı kaplayacak şekilde ölçekler */
+    background-position: center; /* Görseli merkeze yerleştirir */
+    opacity: 0.25; /* Örneğin %15 opaklık. Bu değeri ihtiyaca göre değiştirebilirsiniz (0-1 arası) */
+    z-index: 0; /* En arkadaki katman */
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    position: relative; /* z-index çalışması için */
+    z-index: 2; /* Kartlar başlıklarla aynı içerik katmanında */
+}
+
+.tactical-card {
+    position: relative;
+    /* 3 Boyut hissi için güçlü ve açılı bir zemin gradyanı */
+    background: linear-gradient(145deg, #2a2f2a 0%, #161816 100%);
+    border-radius: 12px; /* Biraz daha yumuşak köşeler ama donanımlı his */
+    padding: 50px 40px;
+    overflow: hidden;
+    
+    /* 3D Kenarlık - Işık üstten ve soldan vuruyormuş hissi (Bevel efekti) */
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+    
+    /* Derin 3D gölgeler: dış gölge + içe doğru eğim hissi */
+    box-shadow: 
+        0 20px 40px rgba(0,0,0,0.6), 
+        0 5px 15px rgba(0,0,0,0.4),
+        inset 0 -3px 10px rgba(0,0,0,0.5),
+        inset 0 2px 5px rgba(255,255,255,0.05);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+}
+
+/* Sadelikten Kurtulmak İçin: Kartın içine taktiksel/karbon doku ekliyoruz */
+.tactical-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Çapraz çok ince siyah çizgilerle doku */
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.04) 0px,
+        rgba(0, 0, 0, 0.04) 2px,
+        transparent 2px,
+        transparent 8px
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Hover (Fare Üzerine Geldiğinde) 3D Sıçrama Efekti */
+.tactical-card:hover {
+    transform: translateY(-12px) scale(1.02); /* Fiziksel olarak yukarı kalkar */
+    background: linear-gradient(145deg, #2e332e 0%, #1a1c1a 100%);
+    
+    /* Bronz ışık yansıması */
+    border-top: 1px solid rgba(166, 144, 106, 0.5);
+    border-left: 1px solid rgba(166, 144, 106, 0.3);
+    
+    /* Gölge yere daha da yayılır ve kartın altından bronz bir ışıma gelir */
+    box-shadow: 
+        0 30px 60px rgba(0,0,0,0.8), 
+        0 10px 20px rgba(0,0,0,0.6),
+        inset 0 -3px 15px rgba(166, 144, 106, 0.15), 
+        inset 0 2px 5px rgba(255,255,255,0.05);
+}
+
+.card-content {
+    position: relative;
+    z-index: 3; 
+}
+
+/* Arkadaki Dev Rakamlar İçin 3 Boyutlu Kazınmış (Engraved) Efekti */
+.card-number {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    font-size: 150px;
+    font-weight: 900;
+    color: transparent; /* İçini boşaltıyoruz */
+    /* Rakamın metale kazınmış (iç oyuk) gibi görünmesi için gölgelendirme hilesi */
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.02);
+    text-shadow: 
+        3px 3px 6px rgba(0,0,0,0.6),
+        -1px -1px 1px rgba(255,255,255,0.05);
+    z-index: 1;
+    transition: all 0.5s ease;
+}
+
+.tactical-card:hover .card-number {
+    -webkit-text-stroke: 1px rgba(166, 144, 106, 0.15); /* Çizgiler bronzlaşır */
+    transform: translate(-5px, 5px); /* Kart kalkarken rakam geriye düşer (Paralaks) */
+}
+
+/* 3D İkon Yuvası (İkon 3 boyutlu bir yuvaya/çukura oturtuldu) */
+.icon-box {
+    font-size: 32px; 
+    margin-bottom: 30px;
+    color: var(--accent-bronze);
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #1c1f1c 0%, #0d0f0d 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Yuva için 3D iç oyuk ve dış çıkıntı hissi */
+    border-top: 1px solid rgba(0,0,0,0.8);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 
+        0 10px 20px rgba(0,0,0,0.5), 
+        inset 0 5px 10px rgba(0,0,0,0.8),
+        inset 0 -2px 5px rgba(166, 144, 106, 0.2);
+    transition: all 0.5s ease;
+}
+
+.tactical-card:hover .icon-box {
+    transform: scale(1.1) translateY(-5px); /* İkon yuvadan yukarı çıkar */
+    box-shadow: 
+        0 15px 25px rgba(0,0,0,0.8), 
+        inset 0 5px 10px rgba(0,0,0,0.6),
+        inset 0 -2px 10px var(--accent-bronze);
+    color: #fff;
+    text-shadow: 0 0 15px var(--accent-bronze); /* İkon parlar */
+}
+
+/* 3D Başlık Ayarları */
+.tactical-card h3 {
+    font-size: 24px;
+    color: #f0f0f0;
+    margin-bottom: 15px;
+    line-height: 1.3;
+    font-weight: 800;
+    letter-spacing: 1px;
+    /* Metne derinlik katmak için kabartma (letterpress) gölge efekti */
+    text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.8), -1px -1px 0 rgba(255,255,255,0.05);
+    transition: color 0.4s ease;
+}
+
+.tactical-card:hover h3 {
+    color: var(--accent-bronze); 
+}
+
+/* Paragraf Ayarları */
+.tactical-card p {
+    color: #a0a5a0;
+    font-size: 15px;
+    margin-bottom: 35px;
+    line-height: 1.7;
+    /* Yazının dokulu arka planda boğulmaması için hafif gölge */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    transition: color 0.4s ease;
+}
+
+.tactical-card:hover p {
+    color: #e0e5e0; 
+}
+
+/* Tıklanabilir Bağlantı (Read More) - Fiziksel 3D Taktiksel Buton */
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(to bottom, #222622, #111311); /* Buton zemini */
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: #8a8f8a; 
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 800;
+    /* Buton için 3 boyutlu kenarlıklar ve gölgeler */
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.8);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Butonun içindeki Ok İşareti (Ekran veya LED Işık gibi) */
+.read-more span {
+    margin-left: 10px;
+    font-size: 16px;
+    color: var(--accent-bronze);
+    background: rgba(0,0,0,0.4); /* Okun arkasında yuvarlak çukur */
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+    transition: transform 0.4s ease, background 0.4s ease;
+}
+
+.tactical-card:hover .read-more {
+    color: var(--text-white); 
+    background: linear-gradient(to bottom, #2a2f2a, #1a1d1a);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.6), inset 0 1px 2px rgba(166, 144, 106, 0.3);
+    border-top: 1px solid rgba(166, 144, 106, 0.5); /* Üst kenar bronz parlar */
+}
+
+.tactical-card:hover .read-more span {
+    transform: translateX(5px); 
+    background: var(--accent-bronze); /* Çukur bronz ışıkla dolar */
+    color: #000;
+    box-shadow: 0 0 10px var(--accent-bronze); /* LED ışık efekti */
+}
+
+/* --- AKTİF/VURGULANAN KART EFEKTİ --- */
+.active-card {
+    border-top: 1px solid rgba(166, 144, 106, 0.3);
+    border-left: 1px solid rgba(166, 144, 106, 0.2);
+}
+
+/* --- MOBİL UYUM --- */
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ==========================================================================
+   TAKTİKSEL KOMUTA MERKEZİ HARİTASI
+   ========================================================================== */
+
+.tactical-map-section {
+    background-color: #080908; /* Çok derin bir siyah/yeşil (Radar ekranı zemini) */
+    position: relative;
+    padding: 120px 20px;
+    overflow: hidden;
+}
+
+.map-radar-container {
+    position: relative;
+    width: 100%;
+    max-width: 3000px;
+    height: 600px;
+    margin: 0 auto;
+    
+    /* 1. KATMAN (EN ALT): SULARIN RENGİ */
+    /* Kendi mavi renginizi buraya yazabilirsiniz. Ben taktiksel koyu bir lacivert/mavi ekledim. */
+    background-color: #1d4875; 
+    
+    border: 1px solid rgba(166, 144, 106, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(0,0,0,0.9);
+    overflow: hidden;
+}
+
+/* 2. KATMAN: KARALAR (MASK YÖNTEMİ İLE) */
+.map-radar-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    
+    /* İSTEDİĞİNİZ KARA RENGİ (#EAE6BC) */
+    background-color: #EAE6BC; 
+    
+    /* SVG dosyasını bir şablon/maske olarak kullanıyoruz */
+    -webkit-mask-image: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg');
+    mask-image: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg');
+    
+    /* Haritayı Türkiye-Afrika'ya odaklayacak şekilde ayarlıyoruz */
+    -webkit-mask-size: 180%;
+    mask-size: 180%;
+    -webkit-mask-position: 48% 30%;
+    mask-position: 48% 30%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    
+    /* Karalar çok parlak gelirse bu değeri düşürerek (örn: 0.5) biraz karartabilirsiniz */
+    opacity: 0.75; 
+    z-index: 1; /* Suların üstünde, çizgilerin altında */
+}
+
+/* 3. KATMAN (EN ÜST): RADAR TARAMA IZGARASI */
+.map-radar-container::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Izgara çizgilerini de karalarla aynı tonda (#EAE6BC) yapıyoruz ki uyumlu olsun */
+    background: linear-gradient(rgba(234, 230, 188, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(234, 230, 188, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+    z-index: 2; /* Karaların da üstünde */
+}
+
+
+
+/* SVG Rotaları (Türkiye'den Afrika'ya Lazer Çizgiler) */
+.map-routes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.route-line {
+    fill: none;
+    stroke: #61613a; /* Çizgi rengi */
+    
+    /* İŞTE BURASI ÇÖZÜM: 100'lük sisteme geçtiğimiz için kalınlığı 0.2 veya 0.15 yapmalıyız */
+    stroke-width: 0.3; 
+    
+    /* Kesik çizgilerin aralıklarını da yeni sisteme göre küçültüyoruz */
+    stroke-dasharray: 1.5, 1; 
+    
+    opacity: 0.9;
+    animation: moveCargo 3s linear infinite;
+    filter: drop-shadow(0 0 1px rgba(214, 40, 40, 0.8));
+}
+
+@keyframes moveCargo {
+    from { stroke-dashoffset: 10; }
+    to { stroke-dashoffset: 0; }
+}
+
+/* Harita Üzerindeki Noktalar (Nodes) */
+.map-node {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translate(-50%, -50%);
+    cursor: crosshair;
+}
+
+/* Noktaların Konumları (X ve Y koordinatları SVG yollarıyla eşleşir) */
+.node-tr { top: 42%; left: 63%; } /* Türkiye */
+.node-nafrica { top: 68.6%; left: 53%; } /* Kuzey Afrika */
+.node-wafrica { top: 68.6%; left: 46.5%; } /* Batı Afrika */
+.node-eafrica { top: 69.9%; left: 57.5%; } /* Doğu Afrika */
+.node-burkinaafrica { top: 73.9%; left: 46.5%; }
+.node-fildişiafrica { top: 79.9%; left: 44.5%; }
+
+/* Merkez Çekirdek (TR için Bronz, Hedefler için Yeşil) */
+.node-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #b13d3d;
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--accent-bronze);
+    position: relative;
+    z-index: 2;
+}
+
+.target-dot {
+    background-color: #5b7553; /* Taktiksel Yeşil */
+    box-shadow: 0 0 15px #5b7553;
+}
+
+/* Radar Sinyali Dalgalanması (Pulse Animasyonu) */
+.pulse-ring {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid var(--accent-bronze);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: radarPulse 2s ease-out infinite;
+    z-index: 1;
+}
+
+.node-nafrica .pulse-ring, 
+.node-wafrica .pulse-ring, 
+.node-eafrica .pulse-ring {
+    border-color: #5b7553;
+}
+
+@keyframes radarPulse {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+/* Üzerine Gelince Çıkan Bilgi Etiketi (Koordinat/İsim) */
+.node-label {
+    position: absolute;
+    top: 20px;
+    background: rgba(10, 12, 10, 0.9);
+    color: var(--text-white);
+    padding: 5px 10px;
+    font-size: 11px;
+    font-family: 'Courier New', monospace; /* Askeri terminal fontu */
+    border: 1px solid var(--accent-bronze);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.map-node:hover .node-label {
+    opacity: 1;
+}
+
+
+
+@keyframes blinker {
+    50% { opacity: 0; }
+}
+
+/* Mobil Uyumluluk */
+@media (max-width: 768px) {
+    .map-radar-container { height: 400px; }
+    .node-label { display: none; } /* Mobilde yazılar karışmasın diye gizledik */
+    .tactical-hud { font-size: 10px; padding: 10px; bottom: 10px; left: 10px; }
+}
