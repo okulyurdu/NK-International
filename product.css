@@ -113,7 +113,28 @@ a {
     min-height: 100vh;
 }
 
-.text-bronze { color: #A6906A; }
+.glitch-title {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+}
+
+.text-bronze {
+    /* Bronz/Altın vurgu rengi */
+    color: #A6906A; 
+}
+
+.cyber-subtitle {
+    color: #6b7a65;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 3px;
+    font-size: 14px;
+    font-weight: 700;
+}
 
 .inventory-section {
     padding: 40px 20px 100px;
@@ -278,4 +299,65 @@ a {
 
 .request-btn:hover .arrow {
     transform: translateX(5px);
+}
+
+@media (max-width: 768px) {
+    /* 1. GENEL DÜZELTMELER (Ekranın sağa kaymasını engeller) */
+    body, html {
+        overflow-x: hidden !important; 
+        max-width: 100%;
+    }
+    
+    .section {
+        padding: 50px 15px; /* Sağdan soldan nefes alma boşluğu */
+    }
+
+    /* 2. MENÜ (NAVBAR) DÜZELTMESİ (Üst üste binmeyi çözer) */
+    .navbar .nav-container {
+        flex-direction: column; /* Logo ve menüyü alt alta alır */
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 22px !important;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo img {
+        height: 45px !important; /* Dev logoyu telefona uygun hale getirdik */
+        margin-right: 10px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap; /* Sığmazsa alt satıra geçer */
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .nav-links li, .nav-link {
+        margin: 0;
+        font-size: 13px !important; /* Linkleri telefona göre küçülttük */
+    }
+
+    .glitch-title {
+    font-size: 2rem;
+   
+}
+
+.product-card{
+    width: 290px;
+    justify-self: center;
+
+}
+
+.inventory-grid{
+    justify-self: center;
+}
+
 }
