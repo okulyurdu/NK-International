@@ -117,6 +117,18 @@ a {
     overflow: hidden;
 }
 
+@media (max-width: 768px) {
+    .hero {
+    position: relative;
+    width: 98%;
+    height: 80%; /* Tam ekran yüksekliği */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+}
+
 /* --- ARKA PLAN FOTOĞRAF SLIDER'I (CSS SADECE) --- */
 .hero-slider {
     position: absolute;
@@ -252,12 +264,43 @@ a {
 
 /* Mobil Cihazlar İçin Uyum (Responsive) */
 @media (max-width: 768px) {
-    .hero-title {
-        font-size: 32px;
-    }
-    .hero-actions {
-        flex-direction: column;
-    }
+   .hero-content {
+    position: relative;
+    text-align: center;
+    padding: 100px;
+    background-color: rgba(228, 223, 181, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    color: var(--accent-bronze);
+    font-size: 2rem;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-size: 1rem;
+    font-weight: 800;
+    margin: 5px;
+} 
+
+.highlight {
+    
+    font-size: 1rem;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: #fff;
+}
+ .hero-description{
+    display: none;
+ }
+
     .nav-links {
         display: none; /* Mobilde hamburger menü gerekir, şimdilik gizliyoruz */
     }
@@ -337,29 +380,11 @@ a {
     z-index: 2;
 }
 
-.about-hero-image {
-    width: 70%;
-    height: 600px;
-    background-color: var(--dark-green);
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    right: 0;
-    top: 0;
-    /* Resmi biraz karartarak üzerine gelen kutuyu belirginleştiriyoruz */
-    box-shadow: inset 0 0 100px rgba(0,0,0,0.8);
-}
 
-.about-hero-image::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(90deg, #121412 0%, rgba(18,20,18,0.3) 100%);
-}
 
 .about-content-box {
     position: relative;
-    width: 55%;
+    width: 98%;
     background: rgba(26, 28, 26, 0.85); /* Yarı şeffaf antrasit */
     backdrop-filter: blur(15px); /* Buzlu cam efekti */
     -webkit-backdrop-filter: blur(15px);
@@ -699,6 +724,20 @@ a {
     border-left: 1px solid rgba(166, 144, 106, 0.2);
 }
 
+#harita_123 {
+    display: flex;           /* Flexbox modelini etkinleştirir */
+    justify-content: center;  /* İçeriği (görseli) yatayda ortalar */
+    align-items: center;
+    width: 100%;
+    padding: 12.5%;
+}
+
+#harita_123 img { 
+    margin: 200PX, auto, 150px;
+    width: 100%;
+    border-radius: 50px;
+}
+
 /* --- MOBİL UYUM --- */
 @media (max-width: 992px) {
     .services-grid {
@@ -706,223 +745,360 @@ a {
     }
 }
 
+
+
+
+
+
+
 @media (max-width: 768px) {
-    .services-grid {
-        grid-template-columns: 1fr;
+    /* 1. GENEL DÜZELTMELER (Ekranın sağa kaymasını engeller) */
+    body, html {
+        overflow-x: hidden !important; 
+        max-width: 100%;
     }
-}
+    
+    .section {
+        padding: 50px 15px; /* Sağdan soldan nefes alma boşluğu */
+    }
+
+    /* 2. MENÜ (NAVBAR) DÜZELTMESİ (Üst üste binmeyi çözer) */
+    .navbar .nav-container {
+        flex-direction: column; /* Logo ve menüyü alt alta alır */
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 22px !important;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo img {
+        height: 45px !important; /* Dev logoyu telefona uygun hale getirdik */
+        margin-right: 10px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap; /* Sığmazsa alt satıra geçer */
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .nav-links li, .nav-link {
+        margin: 0;
+        font-size: 13px !important; /* Linkleri telefona göre küçülttük */
+    }
+
+    /* 3. BÜYÜK BAŞLIKLAR VE YAZILAR (Ekrana sığdırır) */
+    .hero-title, .glitch-title {
+        font-size: 32px !important;
+        line-height: 1.2;
+    }
+
+    .section-title, .panel-title {
+        font-size: 26px !important;
+    }
+
+    .hero-subtitle, .cyber-subtitle {
+        font-size: 12px !important;
+        line-height: 1.5;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+
+    /* Hero Butonları alt alta gelsin */
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    /* 4. KUTULAR VE İÇERİK YERLEŞİMİ (Yan yana duranları alt alta alır) */
+    .cyber-grid, .contact-grid, .services-grid, .inventory-grid {
+        grid-template-columns: 1fr !important; /* Tek sütun yapar */
+        gap: 30px;
+    }
+
+    .glass-panel {
+        padding: 25px 15px !important; /* İç boşlukları daraltır */
+    }
+
+    /* 5. YÖNETİM EKİBİ (DOSSIER) KARTLARI */
+    .dossier-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dossier-card {
+        width: 100% !important; 
+        max-width: 380px; /* Kartların ekranda dev gibi olmasını engeller */
+    }
+
+    /* Mobilde yönetici bilgileri hep açık kalsın (Hover yapamayacakları için) */
+    .dossier-content {
+        transform: translateY(0) !important;
+    }
+    .dossier-hidden-bio {
+        opacity: 1 !important;
+    }
+
+    /* 6. ENVANTER VE İLETİŞİM FORMU */
+    .tactical-filters {
+        flex-direction: column;
+    }
+    
+    .filter-btn {
+        width: 100%;
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   TAKTİKSEL KOMUTA MERKEZİ HARİTASI
-   ========================================================================== */
-
-.tactical-map-section {
-    background-color: #080908; /* Çok derin bir siyah/yeşil (Radar ekranı zemini) */
+    .form-row {
+        grid-template-columns: 1fr !important; /* Form kutularını alt alta dizer */
+    }
+    .about-content-box {
     position: relative;
-    padding: 120px 20px;
-    overflow: hidden;
-}
-
-.map-radar-container {
-    position: relative;
-    width: 100%;
-    max-width: 3000px;
-    height: 600px;
-    margin: 0 auto;
-    
-    /* 1. KATMAN (EN ALT): SULARIN RENGİ */
-    /* Kendi mavi renginizi buraya yazabilirsiniz. Ben taktiksel koyu bir lacivert/mavi ekledim. */
-    background-color: #1d4875; 
-    
-    border: 1px solid rgba(166, 144, 106, 0.2);
-    border-radius: 8px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(0,0,0,0.9);
-    overflow: hidden;
-}
-
-/* 2. KATMAN: KARALAR (MASK YÖNTEMİ İLE) */
-.map-radar-container::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    
-    /* İSTEDİĞİNİZ KARA RENGİ (#EAE6BC) */
-    background-color: #EAE6BC; 
-    
-    /* SVG dosyasını bir şablon/maske olarak kullanıyoruz */
-    -webkit-mask-image: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg');
-    mask-image: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg');
-    
-    /* Haritayı Türkiye-Afrika'ya odaklayacak şekilde ayarlıyoruz */
-    -webkit-mask-size: 180%;
-    mask-size: 180%;
-    -webkit-mask-position: 48% 30%;
-    mask-position: 48% 30%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    
-    /* Karalar çok parlak gelirse bu değeri düşürerek (örn: 0.5) biraz karartabilirsiniz */
-    opacity: 0.75; 
-    z-index: 1; /* Suların üstünde, çizgilerin altında */
-}
-
-/* 3. KATMAN (EN ÜST): RADAR TARAMA IZGARASI */
-.map-radar-container::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    /* Izgara çizgilerini de karalarla aynı tonda (#EAE6BC) yapıyoruz ki uyumlu olsun */
-    background: linear-gradient(rgba(234, 230, 188, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(234, 230, 188, 0.05) 1px, transparent 1px);
-    background-size: 30px 30px;
-    pointer-events: none;
-    z-index: 2; /* Karaların da üstünde */
-}
-
-
-
-/* SVG Rotaları (Türkiye'den Afrika'ya Lazer Çizgiler) */
-.map-routes {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    width: 98%;
+    background: rgba(26, 28, 26, 0.85); /* Yarı şeffaf antrasit */
+    backdrop-filter: blur(15px); /* Buzlu cam efekti */
+    -webkit-backdrop-filter: blur(15px);
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-left: none;
+    margin-top: 80px;
+    box-shadow: 20px 20px 50px rgba(0,0,0,0.5);
     z-index: 2;
-    pointer-events: none;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /* ==========================================================================
+    TAKTİKSEL KOMUTA MERKEZİ HARİTASI
+    ========================================================================== */
+
+    .tactical-map-section {
+        background-color: #080908; /* Çok derin bir siyah/yeşil (Radar ekranı zemini) */
+        position: relative;
+        padding: 120px 20px;
+        overflow: hidden;
+    }
+
+    .map-radar-container {
+        position: relative;
+        width: 100%;
+        max-width: 3000px;
+        height: 600px;
+        margin: 0 auto;
+        
+        /* 1. KATMAN (EN ALT): SULARIN RENGİ */
+        /* Kendi mavi renginizi buraya yazabilirsiniz. Ben taktiksel koyu bir lacivert/mavi ekledim. */
+        background-color: #1d4875; 
+        
+        border: 1px solid rgba(166, 144, 106, 0.2);
+        border-radius: 8px;
+        box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 30px rgba(0,0,0,0.9);
+        overflow: hidden;
+    }
+
+    /* 2. KATMAN: KARALAR (MASK YÖNTEMİ İLE) */
+    .map-radar-container::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        
+        /* İSTEDİĞİNİZ KARA RENGİ (#EAE6BC) */
+        background-color: #EAE6BC; 
+        
+        /* SVG dosyasını bir şablon/maske olarak kullanıyoruz */
+        -webkit-mask-image: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg');
+        mask-image: url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg');
+        
+        /* Haritayı Türkiye-Afrika'ya odaklayacak şekilde ayarlıyoruz */
+        -webkit-mask-size: 180%;
+        mask-size: 180%;
+        -webkit-mask-position: 48% 30%;
+        mask-position: 48% 30%;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        
+        /* Karalar çok parlak gelirse bu değeri düşürerek (örn: 0.5) biraz karartabilirsiniz */
+        opacity: 0.75; 
+        z-index: 1; /* Suların üstünde, çizgilerin altında */
+    }
+
+    /* 3. KATMAN (EN ÜST): RADAR TARAMA IZGARASI */
+    .map-radar-container::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        /* Izgara çizgilerini de karalarla aynı tonda (#EAE6BC) yapıyoruz ki uyumlu olsun */
+        background: linear-gradient(rgba(234, 230, 188, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(234, 230, 188, 0.05) 1px, transparent 1px);
+        background-size: 30px 30px;
+        pointer-events: none;
+        z-index: 2; /* Karaların da üstünde */
+    }
+
+
+
+    /* SVG Rotaları (Türkiye'den Afrika'ya Lazer Çizgiler) */
+    .map-routes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .route-line {
+        fill: none;
+        stroke: #61613a; /* Çizgi rengi */
+        
+        /* İŞTE BURASI ÇÖZÜM: 100'lük sisteme geçtiğimiz için kalınlığı 0.2 veya 0.15 yapmalıyız */
+        stroke-width: 0.3; 
+        
+        /* Kesik çizgilerin aralıklarını da yeni sisteme göre küçültüyoruz */
+        stroke-dasharray: 1.5, 1; 
+        
+        opacity: 0.9;
+        animation: moveCargo 3s linear infinite;
+        filter: drop-shadow(0 0 1px rgba(214, 40, 40, 0.8));
+    }
+
+    @keyframes moveCargo {
+        from { stroke-dashoffset: 10; }
+        to { stroke-dashoffset: 0; }
+    }
+
+    /* Harita Üzerindeki Noktalar (Nodes) */
+    .map-node {
+        position: absolute;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: translate(-50%, -50%);
+        cursor: crosshair;
+    }
+
+    /* Noktaların Konumları (X ve Y koordinatları SVG yollarıyla eşleşir) */
+    .node-tr { top: 42%; left: 63%; } /* Türkiye */
+    .node-nafrica { top: 68.6%; left: 53%; } /* Kuzey Afrika */
+    .node-wafrica { top: 68.6%; left: 46.5%; } /* Batı Afrika */
+    .node-eafrica { top: 69.9%; left: 57.5%; } /* Doğu Afrika */
+    .node-burkinaafrica { top: 73.9%; left: 46.5%; }
+    .node-fildişiafrica { top: 79.9%; left: 44.5%; }
+
+    /* Merkez Çekirdek (TR için Bronz, Hedefler için Yeşil) */
+    .node-dot {
+        width: 12px;
+        height: 12px;
+        background-color: #b13d3d;
+        border-radius: 50%;
+        box-shadow: 0 0 15px var(--accent-bronze);
+        position: relative;
+        z-index: 2;
+    }
+
+    .target-dot {
+        background-color: #5b7553; /* Taktiksel Yeşil */
+        box-shadow: 0 0 15px #5b7553;
+    }
+
+    /* Radar Sinyali Dalgalanması (Pulse Animasyonu) */
+    .pulse-ring {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        border: 2px solid var(--accent-bronze);
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: radarPulse 2s ease-out infinite;
+        z-index: 1;
+    }
+
+    .node-nafrica .pulse-ring, 
+    .node-wafrica .pulse-ring, 
+    .node-eafrica .pulse-ring {
+        border-color: #5b7553;
+    }
+
+    @keyframes radarPulse {
+        0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+    }
+
+    /* Üzerine Gelince Çıkan Bilgi Etiketi (Koordinat/İsim) */
+    .node-label {
+        position: absolute;
+        top: 20px;
+        background: rgba(10, 12, 10, 0.9);
+        color: var(--text-white);
+        padding: 5px 10px;
+        font-size: 11px;
+        font-family: 'Courier New', monospace; /* Askeri terminal fontu */
+        border: 1px solid var(--accent-bronze);
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .map-node:hover .node-label {
+        opacity: 1;
+    }
+
+
+
+    @keyframes blinker {
+        50% { opacity: 0; }
+    }
+
+    /* Mobil Uyumluluk */
+    @media (max-width: 768px) {
+        .map-radar-container { height: 400px; }
+        .node-label { display: none; } /* Mobilde yazılar karışmasın diye gizledik */
+        .tactical-hud { font-size: 10px; padding: 10px; bottom: 10px; left: 10px; }
+    }
+
 }
 
-.route-line {
-    fill: none;
-    stroke: #61613a; /* Çizgi rengi */
-    
-    /* İŞTE BURASI ÇÖZÜM: 100'lük sisteme geçtiğimiz için kalınlığı 0.2 veya 0.15 yapmalıyız */
-    stroke-width: 0.3; 
-    
-    /* Kesik çizgilerin aralıklarını da yeni sisteme göre küçültüyoruz */
-    stroke-dasharray: 1.5, 1; 
-    
-    opacity: 0.9;
-    animation: moveCargo 3s linear infinite;
-    filter: drop-shadow(0 0 1px rgba(214, 40, 40, 0.8));
-}
-
-@keyframes moveCargo {
-    from { stroke-dashoffset: 10; }
-    to { stroke-dashoffset: 0; }
-}
-
-/* Harita Üzerindeki Noktalar (Nodes) */
-.map-node {
-    position: absolute;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transform: translate(-50%, -50%);
-    cursor: crosshair;
-}
-
-/* Noktaların Konumları (X ve Y koordinatları SVG yollarıyla eşleşir) */
-.node-tr { top: 42%; left: 63%; } /* Türkiye */
-.node-nafrica { top: 68.6%; left: 53%; } /* Kuzey Afrika */
-.node-wafrica { top: 68.6%; left: 46.5%; } /* Batı Afrika */
-.node-eafrica { top: 69.9%; left: 57.5%; } /* Doğu Afrika */
-.node-burkinaafrica { top: 73.9%; left: 46.5%; }
-.node-fildişiafrica { top: 79.9%; left: 44.5%; }
-
-/* Merkez Çekirdek (TR için Bronz, Hedefler için Yeşil) */
-.node-dot {
-    width: 12px;
-    height: 12px;
-    background-color: #b13d3d;
-    border-radius: 50%;
-    box-shadow: 0 0 15px var(--accent-bronze);
-    position: relative;
-    z-index: 2;
-}
-
-.target-dot {
-    background-color: #5b7553; /* Taktiksel Yeşil */
-    box-shadow: 0 0 15px #5b7553;
-}
-
-/* Radar Sinyali Dalgalanması (Pulse Animasyonu) */
-.pulse-ring {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    border: 2px solid var(--accent-bronze);
-    border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: radarPulse 2s ease-out infinite;
-    z-index: 1;
-}
-
-.node-nafrica .pulse-ring, 
-.node-wafrica .pulse-ring, 
-.node-eafrica .pulse-ring {
-    border-color: #5b7553;
-}
-
-@keyframes radarPulse {
-    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-}
-
-/* Üzerine Gelince Çıkan Bilgi Etiketi (Koordinat/İsim) */
-.node-label {
-    position: absolute;
-    top: 20px;
-    background: rgba(10, 12, 10, 0.9);
-    color: var(--text-white);
-    padding: 5px 10px;
-    font-size: 11px;
-    font-family: 'Courier New', monospace; /* Askeri terminal fontu */
-    border: 1px solid var(--accent-bronze);
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-}
-
-.map-node:hover .node-label {
-    opacity: 1;
-}
 
 
 
-@keyframes blinker {
-    50% { opacity: 0; }
-}
 
-/* Mobil Uyumluluk */
-@media (max-width: 768px) {
-    .map-radar-container { height: 400px; }
-    .node-label { display: none; } /* Mobilde yazılar karışmasın diye gizledik */
-    .tactical-hud { font-size: 10px; padding: 10px; bottom: 10px; left: 10px; }
-}
+
+
+
+
+
