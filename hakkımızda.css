@@ -63,8 +63,10 @@ a {
     color: var(--text-white);
     letter-spacing: 2px;
     
-   
 }
+
+
+
 
 .logo span {
     font-weight: 500;
@@ -398,8 +400,76 @@ a {
 @media (max-width: 992px) {
     .cyber-grid { grid-template-columns: 1fr; }
     .dossier-card { width: calc(50% - 20px); }
+
+    body, html {
+        overflow-x: hidden !important; 
+        max-width: 100%;
+    }
+    
+    .section {
+        padding: 50px 15px; /* Sağdan soldan nefes alma boşluğu */
+    }
+
+    /* 2. MENÜ (NAVBAR) DÜZELTMESİ (Üst üste binmeyi çözer) */
+    .navbar .nav-container {
+        flex-direction: column; /* Logo ve menüyü alt alta alır */
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 22px !important;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo img {
+        height: 45px !important; /* Dev logoyu telefona uygun hale getirdik */
+        margin-right: 10px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap; /* Sığmazsa alt satıra geçer */
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .nav-links li, .nav-link {
+        margin: 0;
+        font-size: 13px !important; /* Linkleri telefona göre küçülttük */
+    }
+
+    .text-red{
+        font-size:1.5rem;
+    }
+
+   
+
+    .glass-panel{
+        width: 280px; 
+        justify-self: center;
+    }
+
+    .glass-panel h3{
+        font-size: 1rem;
+    }
+
+    .panel-title{
+        font-size: 1.2rem;
+    }
+
+    .vm-icon{
+        display: none;
+    }
+
+    .vision-mission-stack{
+        justify-self: center;
+    }
+
+
 }
 
-@media (max-width: 768px) {
-    .dossier-card { width: 100%; }
-}
