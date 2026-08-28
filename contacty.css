@@ -144,14 +144,27 @@ a {
 
 
 /* Sayfa Başlığı Gradienti */
-.glitch-title{
+.glitch-title {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
     color: #ffffff;
-    font-size: 4rem;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.8);
 }
 
-.cyber-subtitle{
-    color: #5e380e;
-    font-size: 2rem;
+.text-bronze {
+    /* Bronz/Altın vurgu rengi */
+    color: #4e432f; 
+}
+
+.cyber-subtitle {
+    color: #394136;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 3px;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 
@@ -328,4 +341,73 @@ a {
 @media (max-width: 992px) {
     .contact-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
+
+     body, html {
+        overflow-x: hidden !important; 
+        max-width: 100%;
+    }
+    
+    .section {
+        padding: 50px 15px; /* Sağdan soldan nefes alma boşluğu */
+    }
+
+    /* 2. MENÜ (NAVBAR) DÜZELTMESİ (Üst üste binmeyi çözer) */
+    .navbar .nav-container {
+        flex-direction: column; /* Logo ve menüyü alt alta alır */
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 22px !important;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo img {
+        height: 45px !important; /* Dev logoyu telefona uygun hale getirdik */
+        margin-right: 10px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap; /* Sığmazsa alt satıra geçer */
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .nav-links li, .nav-link {
+        margin: 0;
+        font-size: 13px !important; /* Linkleri telefona göre küçülttük */
+    }
+
+      .glitch-title {
+    font-size: 2rem;
+    }
+
+    .cyber-subtitle{
+        font-size: 1rem;
+    }
+
+    .contact-info-panel{
+        width: 290px;
+        justify-self: center;
+    }
+
+    .contact-grid{
+        justify-self: center;
+    }
+
+    .contact-form-panel{
+        width: 290px;
+        justify-self: center;
+    }
+
+    .info-icon{
+        display: none;
+    }
+
 }
