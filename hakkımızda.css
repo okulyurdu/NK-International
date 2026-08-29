@@ -396,6 +396,8 @@ a {
     border-radius: 3px;
 }
 
+
+
 /* --- MOBİL UYUM --- */
 @media (max-width: 992px) {
     .cyber-grid { grid-template-columns: 1fr; }
@@ -470,6 +472,16 @@ a {
         justify-self: center;
     }
 
+
+
+
+  .dossier-card.in-view .dossier-image-wrapper img {
+        filter: grayscale(0%) contrast(1.1) brightness(1);
+        transform: scale(1.03);
+    }
+
+
+    
 
 }
 
