@@ -40,7 +40,7 @@
                 <!-- Yönetici Kartı 1 -->
                 <div class="dossier-card">
                     <div class="dossier-image-wrapper">
-                        <img src="./fotolar/ishak.jpeg" alt="Yönetici">
+                        <img class="görsel" src="./fotolar/ishak.jpeg" alt="Yönetici">
                         <div class="scanner-line"></div>
                     </div>
                     <div class="dossier-content">
@@ -58,7 +58,7 @@
                 <!-- Yönetici Kartı 2 -->
                 <div class="dossier-card">
                     <div class="dossier-image-wrapper">
-                        <img src="./fotolar/musco.jpeg" alt="Yönetici">
+                        <img class="görsel" src="./fotolar/musco.jpeg" alt="Yönetici">
                         <div class="scanner-line"></div>
                     </div>
                     <div class="dossier-content">
@@ -76,7 +76,7 @@
                 <!-- Yönetici Kartı 3 -->
                 <div class="dossier-card">
                     <div class="dossier-image-wrapper">
-                        <img src="./fotolar/isco.jpeg" alt="Yönetici">
+                        <img class="görsel" src="./fotolar/isco.jpeg" alt="Yönetici">
                         <div class="scanner-line"></div>
                     </div>
                     <div class="dossier-content">
@@ -94,7 +94,7 @@
                 <!-- Yönetici Kartı 4 -->
                 <div class="dossier-card">
                     <div class="dossier-image-wrapper">
-                        <img src="./fotolar/dicko.jpeg" alt="Yönetici">
+                        <img class="görsel" src="./fotolar/dicko.jpeg" alt="Yönetici">
                         <div class="scanner-line"></div>
                     </div>
                     <div class="dossier-content">
@@ -112,7 +112,7 @@
                 <!-- Yönetici Kartı 5 -->
                 <div class="dossier-card">
                     <div class="dossier-image-wrapper">
-                        <img src="./fotolar/Dr.JPG" alt="Yönetici">
+                        <img class="görsel" src="./fotolar/Dr.JPG" alt="Yönetici">
                         <div class="scanner-line"></div>
                     </div>
                     <div class="dossier-content">
@@ -188,6 +188,43 @@
             </div>
         </div>
     </section>
+
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Sadece mobil ekranlarda (992px ve altı) çalışmasını sağlarız
+            if (window.innerWidth <= 992) {
+                const cards = document.querySelectorAll('.dossier-card');
+                
+                // rootMargin: '-40% 0px -40% 0px' demek; 
+                // Ekranın üstten %40'ını ve alttan %40'ını görmezden gel, 
+                // sadece ortadaki %20'lik dilime girerse efekti çalıştır demektir.
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '-40% 0px -40% 0px', 
+                    threshold: 0
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Kart ekranın tam ortasına geldiğinde 'in-view' class'ını ekler (Renklenir)
+                            entry.target.classList.add('in-view'); 
+                        } else {
+                            // Kart ekranın ortasından çıktığında class'ı siler (Renksizleşir)
+                            entry.target.classList.remove('in-view'); 
+                        }
+                    });
+                }, observerOptions);
+
+                cards.forEach(card => {
+                    observer.observe(card);
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
