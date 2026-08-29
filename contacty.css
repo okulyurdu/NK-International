@@ -350,6 +350,11 @@ a {
         overflow-x: hidden !important; 
         max-width: 100%;
     }
+
+
+    .numara{
+    color: #ffffff;
+}
     
     .section {
         padding: 50px 15px; /* Sağdan soldan nefes alma boşluğu */
