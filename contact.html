@@ -77,52 +77,84 @@
 
                 <!-- Sağ Taraf: Güvenli Form -->
                 <div class="contact-form-panel glass-panel">
-                    <div class="panel-header">
-                        <span style="color:#A6906A"></span>FORMULAIRE DE DEMANDE
-                    </div>
-                    
-                    <form class="tactical-form">
-                        <div class="form-row">
-                            <div class="input-group">
-                                <label>NOM ET PRÉNOM DU RESPONSABLE</label>
-                                <input type="text" placeholder="Saisissez..." required>
-                            </div>
-                            <div class="input-group">
-                                <label>INSTITUTION / ORGANISATION</label>
-                                <input type="text" placeholder="Saisissez..." required>
-                            </div>
-                        </div>
+    <div class="panel-header">
+        <span style="color:#A6906A">FORMULAIRE DE DEMANDE</span>
+    </div>
+    
+    <!-- action kısmına Formspree linkinizi yapıştırın, method="POST" eklendi -->
+    <form class="tactical-form" action="https://formspree.io/f/meaqopzd" method="POST">
+        <div class="form-row">
+            <div class="input-group">
+                <label>NOM ET PRÉNOM</label>
+                <!-- name="Ad_Soyad" eklendi -->
+                <input type="text" name="nom_prenom" placeholder="Saisissez..." required>
+            </div>
+            
+        </div>
 
-                        <div class="form-row">
-                            <div class="input-group">
-                                <label>E-MAIL SÉCURISÉ</label>
-                                <input type="email" placeholder="Saisissez..." required>
-                            </div>
-                            <div class="input-group">
-                                <label>NUMÉRO DE TÉLÉPHONE</label>
-                                <input type="tel" placeholder="Saisissez...">
-                            </div>
-                        </div>
+        <div class="form-row">
+            <div class="input-group">
+                <label>ADESSE E-MAIL</label>
+                <!-- name="Email" eklendi -->
+                <input type="email" name="Email" placeholder="Saisissez..." required>
+            </div>
+            <div class="input-group">
+                <label>NUMÉRO DE TÉLÉPHONE</label>
+                <!-- name="Telefon" eklendi -->
+                <input type="tel" name="Telephone" placeholder="Saisissez...">
+            </div>
+        </div>
 
-                        <div class="input-group">
-                            <label>SUJET DE L'APPROVISIONNEMENT / DEMANDE</label>
-                            <input type="text" placeholder="Saisissez..." required>
-                        </div>
 
-                        <div class="input-group">
-                            <label>CONTENU DU MESSAGE / DÉTAILS</label>
-                            <textarea rows="4" placeholder="Écrivez votre message ici..." required></textarea>
-                        </div>
+        <div class="input-group">
+            <label>MESSAGE</label>
+            <!-- name="Mesaj" eklendi -->
+            <textarea name="Message" rows="4" placeholder="Écrivez votre message ici..." required></textarea>
+        </div>
 
-                        <button type="submit" class="submit-btn">
-                            ENVOYER <span class="btn-icon">▲</span>
-                        </button>
-                    </form>
-                </div>
+        <button type="submit" class="submit-btn">
+            ENVOYER <span class="btn-icon">▲</span>
+        </button>
+    </form>
+</div>
 
             </div>
         </div>
     </section>
+
+
+
+
+
+    <script>
+    document.querySelector('.tactical-form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Formun sayfayı yenileyip Formspree sayfasına gitmesini engeller
+
+        var form = this;
+        var data = new FormData(form);
+
+        // Formu arka planda Formspree'ye gönderir
+        fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                // Başarılı olursa ekrana Fransızca uyarı çıkar
+                alert("Votre message a été envoyé avec succès !"); 
+                // İsterseniz Türkçe de yazabilirsiniz: alert("Mesajınız başarıyla gönderildi!");
+                
+                form.reset(); // Gönderdikten sonra form kutularını temizler
+            } else {
+                alert("Une erreur s'est produite. Veuillez réessayer."); // Hata uyarısı
+            }
+        }).catch(error => {
+            alert("Une erreur s'est produite. Veuillez réessayer.");
+        });
+    });
+</script>
 
 </body>
 </html>
